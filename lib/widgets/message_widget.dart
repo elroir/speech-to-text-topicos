@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class MessageWidget extends StatefulWidget {
 
-  final Function onPressedMic;
-  final Function onPressedEnviar;
-  final Color colorMicrofono;
-  final String ayuda;
-  final TextEditingController textController;
+  final Function onPressedMic; // es el metodo para el boton del micropfono
+  final Function onPressedEnviar; //metodo para el boton de enviar
+  final Color colorMicrofono; //color del icono del mic (por defecto rojo)
+  final String ayuda; //el hint del text field
+  final TextEditingController textController; //el controlador para el text field
 
   MessageWidget({@required this.onPressedMic,
                  @required this.onPressedEnviar,
