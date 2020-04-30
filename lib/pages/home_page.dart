@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:speech_recognition/speech_recognition.dart';
+import 'package:speechtotext/models/document_model.dart';
+import 'package:speechtotext/providers/natural_language_provider.dart';
 import 'package:speechtotext/utils/widget_utils.dart';
+
 
 class HomePage extends StatefulWidget {
   @override
@@ -14,6 +17,8 @@ class _HomePageState extends State<HomePage> {
   final _speechController = TextEditingController();
   final formKey = GlobalKey<FormState>();
   String resultText = "";
+  DocumentModel documentModel = new DocumentModel();
+  final naturalLanguage = new NaturalLanguageProvider();
 
   @override
   void initState() {
@@ -66,7 +71,11 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             SizedBox(height: 20.0,width: 20.0,),
-            crearInputMessage("mensaje","mensaje",_speechController,_speaking)
+            crearInputMessage("mensaje","mensaje",_speechController,_speaking),
+            FloatingActionButton(
+              child: Icon(Icons.http),
+              onPressed:() => naturalLanguage.cargarDatos(documentModel),
+            )
 
           ],
         ),
@@ -74,7 +83,15 @@ class _HomePageState extends State<HomePage> {
 
     );
   }
+
+// _getDatos() async {
+//    setState(() {
+//      resultText = naturalLanguage.cargarDatos(naturalLanguageModel);
+//    });
+//  }
+
   _speaking(){
+
   if(_isAvailable && !_isListening)
       _speechRecognition.listen(locale: "es_ES").then(
      (result) => print('$result')
@@ -85,6 +102,7 @@ class _HomePageState extends State<HomePage> {
       );
   setState(() {
     resultText = _speechController.text;
+    
   });
 
 }
