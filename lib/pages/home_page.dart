@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:speech_recognition/speech_recognition.dart';
 import 'package:speechtotext/models/document_model.dart';
 import 'package:speechtotext/providers/natural_language_provider.dart';
-import 'package:speechtotext/utils/widget_utils.dart';
+import 'package:speechtotext/widgets/message_widget.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -15,8 +15,8 @@ class _HomePageState extends State<HomePage> {
   bool _isAvailable = false;
   bool _isListening = false;
   final _speechController = TextEditingController();
-  final formKey = GlobalKey<FormState>();
   String resultText = "";
+  String response = '';
   DocumentModel documentModel = new DocumentModel();
   final naturalLanguage = new NaturalLanguageProvider();
 
@@ -54,41 +54,75 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-           // _createButtons(),
-            SizedBox(height: 20.0,),
-            Container(
-              width: MediaQuery.of(context).size.width * 0.8,
-              height: MediaQuery.of(context).size.width * 0.3,
-              child: Text(resultText,style: TextStyle(fontSize: 16),),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(6.0),
-                border: Border.all(),
-              ),
-            ),
-            SizedBox(height: 20.0,width: 20.0,),
-            crearInputMessage("mensaje","mensaje",_speechController,_speaking),
-            FloatingActionButton(
-              child: Icon(Icons.http),
-              onPressed:() => naturalLanguage.cargarDatos(documentModel),
-            )
 
-          ],
-        ),
+      appBar: AppBar(
+        title: Text('Lenguaje natural'),
+        actions: <Widget>[
+          FlatButton(
+            child: Text('Ejemplo'),
+            color: Colors.redAccent,
+            onPressed: () => _example() ,
+          )
+        ],
+      ),
+        body: ListView(
+         children: <Widget>[
+           _principal()
+      ],
+
+      ),
+    );
+  }
+
+  _example() {
+    naturalLanguage.cargarDatos(documentModel).then((String value){
+      setState(() {
+        response = value;
+      });
+    });
+
+  }
+
+  Widget _principal(){
+    return Container(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          // _createButtons(),
+          SizedBox(height: 20.0,),
+          Container(
+            width: MediaQuery.of(context).size.width * 0.9,
+            height: MediaQuery.of(context).size.height * 0.6,
+            child: ListView(
+              children: <Widget>[
+                Text(response,style: TextStyle(fontSize: 16),)
+              ],
+            ),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(6.0),
+              border: Border.all(),
+            ),
+          ),
+          SizedBox(height: 20.0,width: 20.0,),
+          MessageWidget(
+            textController: _speechController,
+            onPressedMic: _speaking,
+            onPressedEnviar: _getData,),
+        ],
       ),
 
     );
   }
+   _getData() {
+    final data = DocumentModel(content: resultText);
+    naturalLanguage.cargarDatos(data).then((String value){
+      setState(() {
+        response = value;
+      });
+    });
 
-// _getDatos() async {
-//    setState(() {
-//      resultText = naturalLanguage.cargarDatos(naturalLanguageModel);
-//    });
-//  }
+  }
 
   _speaking(){
 

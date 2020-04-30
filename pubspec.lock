@@ -95,20 +95,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.11+1"
-  holding_gesture:
-    dependency: "direct main"
-    description:
-      name: holding_gesture
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.3"
   http:
     dependency: "direct main"
     description:
       name: http
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.12.0+4"
+    version: "0.12.1"
   http_parser:
     dependency: transitive
     description:
@@ -165,13 +158,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.5"
-  simple_gesture_detector:
-    dependency: "direct main"
-    description:
-      name: simple_gesture_detector
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.4"
   sky_engine:
     dependency: transitive
     description: flutter

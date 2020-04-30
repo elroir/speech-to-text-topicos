@@ -24,8 +24,6 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   speech_recognition: ^0.3.0+1
-  holding_gesture: ^0.0.3
-  simple_gesture_detector: ^0.1.4
   http:
   googleapis:
   googleapis_auth:
@@ -47,8 +45,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  assets:
-    - prueba.json
+  # assets:
+
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:speechtotext/pages/home_page.dart';
+import 'package:speechtotext/pages/bottombar_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -8,13 +8,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Flutter Speech to text',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.red,
+        accentColor: Color(0xFFFEF9EB),
       ),
-      home: HomePage(),
+      home: BottomBarPage(),
     );
   }
 }
