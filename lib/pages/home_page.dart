@@ -42,7 +42,8 @@ class _HomePageState extends State<HomePage> {
     );
 
     _speechRecognition.setRecognitionCompleteHandler(
-            () => setState(()=> _isListening = false)
+            () => setState((){_isListening = false;
+            _speechController.text  = resultText;})
     );
 
     _speechRecognition.activate().then(
@@ -61,7 +62,7 @@ class _HomePageState extends State<HomePage> {
           FlatButton(
             child: Text('Ejemplo'),
             color: Colors.redAccent,
-            onPressed: () => _example() ,
+            onPressed: _example ,
           )
         ],
       ),
@@ -78,6 +79,7 @@ class _HomePageState extends State<HomePage> {
     naturalLanguage.cargarDatos(documentModel).then((String value){
       setState(() {
         response = value;
+        print(response);
       });
     });
 
@@ -115,10 +117,12 @@ class _HomePageState extends State<HomePage> {
     );
   }
    _getData() {
-    final data = DocumentModel(content: resultText);
+    final data = DocumentModel(content: _speechController.text);
     naturalLanguage.cargarDatos(data).then((String value){
       setState(() {
         response = value;
+        resultText = '';
+        _speechController.text = '';
       });
     });
 
@@ -128,16 +132,12 @@ class _HomePageState extends State<HomePage> {
 
   if(_isAvailable && !_isListening)
       _speechRecognition.listen(locale: "es_ES").then(
-     (result) => print('$result')
+     (result) => resultText = result
       );
   else
     _speechRecognition.stop().then(
     (result) => setState(() => _isListening = result),
       );
-  setState(() {
-    resultText = _speechController.text;
-    
-  });
 
 }
 //  Widget _createButtons(){

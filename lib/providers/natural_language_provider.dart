@@ -9,7 +9,7 @@ class NaturalLanguageProvider {
 
 
   final String _url = 'https://language.googleapis.com/v1/documents:analyzeEntities';
-  final String _apikey= '<API_KEY>';
+  final String _apikey= 'AIzaSyBj1Zm3YIRBUOCYAWWJPevwaNvy00KEi_w';
 
 
   Future<String> cargarDatos( DocumentModel nlp ) async{
@@ -25,7 +25,7 @@ class NaturalLanguageProvider {
     }));
 
     final decodedData = json.decode(resp.body);
-
+    print(decodedData);
     return decodedData.toString();
 
   }

@@ -67,7 +67,7 @@ class _MessageWidgetState extends State<MessageWidget> {
                 Icons.keyboard_voice,
                 color: Colors.white,
               ),
-              onLongPress: widget.onPressedMic
+              onTap: widget.onPressedMic
             ),
           )
         ],
